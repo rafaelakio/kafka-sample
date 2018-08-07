@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProducerService {
 
-	@Autowired
-    private KafkaTemplate<String, String> template;
+//	@Autowired
+//    private KafkaTemplate<String, String> template;
 	
 //	private final CountDownLatch latch = new CountDownLatch(3);
 	
@@ -16,6 +16,7 @@ public class ProducerService {
 		final String msg
 	) {
 		try {
+			KafkaTemplate<String, String> template = ProducerBuilder.create();
 			template.send("myTopic", msg);
 //			latch.await(60, TimeUnit.SECONDS);
 		} catch (Exception e) {
@@ -27,6 +28,7 @@ public class ProducerService {
 			final String msg
 		) {
 			try {
+				KafkaTemplate<String, String> template = ProducerBuilder.create();
 				template.send("myTopic1", msg);
 			} catch (Exception e) {
 				System.out.println(e);
